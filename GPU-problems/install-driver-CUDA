@@ -1,0 +1,45 @@
+安装CUDA教程 CUDA安装包中有显卡驱动，可以一起安装
+https://developer.nvidia.com/cuda-toolkit-archive 选择对应版本
+根据网页上的两行命令操作
+
+如果已有显卡驱动，不选择安装显卡驱动
+
+添加bashrc的搜索路径
+sudo gedit ~/.bashrc
+
+export CUDA_HOME=/usr/local/cuda-11.1
+export LD_LIBRARY_PATH=${CUDA_HOME}/lib64
+export PATH=${CUDA_HOME}/bin:${PATH}
+
+检查是否安装完成
+nvcc -V
+
+安装cuDNN教程
+https://developer.nvidia.com/rdp/cudnn-download 选择对应版本
+
+解压tgz压缩包
+tar -zxvf XXX.tgz
+
+把运行库文件复制到已经安装的CUDA目录下
+sudo cp cuda/include/* /usr/local/cuda-11.1/include
+sudo cp cuda/lib64/libcudnn* /usr/local/cuda-11.1/lib64
+sudo chmod a+r /usr/local/cuda-11.1/include/cudnn.h 
+sudo chmod a+r /usr/local/cuda-11.1/lib64/libcudnn*
+
+查看是否安装成功
+cat /usr/local/cuda/include/cudnn_version.h | grep CUDNN_MAJOR -A 2
+
+建议使用该方法安装cuDNN
+
+下载cuDNN所有的deb文件：Runtime Library，Developer Library和Code Samples的deb文件。
+使用sudo dpkg -i按照以下顺序安装
+sudo dpkg -i libcudnn8_8.1.0.77-1+cuda11.2_amd64.deb
+sudo dpkg -i libcudnn8-dev_8.1.0.77-1+cuda11.2_amd64.deb
+sudo dpkg -i libcudnn8-samples_8.1.0.77-1+cuda11.2_amd64.deb
+
+卸载CUDA
+apt安装法，就用apt remove
+run文件手动安装，使用官方方式
+sudo运行/usr/local/cuda-XX/bin/cuda-uninstaller
+
+

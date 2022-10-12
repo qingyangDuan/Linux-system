@@ -1,0 +1,28 @@
+sudo ls /etc/apt/sources.list.d  // find that bad ppa list file, then rm it
+sudo rm  /etc/apt/sources.list.d/PPA_Name.list
+
+
+
+/etc/apt/sources.list   :   This is the list of official reporsitories, which holds the url of software packages. https://repogen.simplylinux.ch/  can help to recreate it.
+/etc/apt/sources.list.d   :   This is the list of PPA(personal package archive) reporsitories, which holds the url of software packages
+
+
+//show avaliable package versions
+apt-cache policy <packageName>
+aptitude versions name
+
+
+
+//unable to correct problem， conflits and broken, use aptitude to specify problem
+sudo aptitude install name
+sudo apt install name=version
+
+
+
+//remove packages
+sudo apt purge *nvidia* 
+dpkg -l | grep nvidia  #check packages about nvidia drivers
+# some packages may need “  dpkg --purge --force-all name ”  to remove them
+
+
+

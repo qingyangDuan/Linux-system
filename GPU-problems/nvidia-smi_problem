@@ -1,0 +1,22 @@
+
+
+
+
+使用nvidia-smi报错：
+NVIDIA-SMI has failed because it couldn’t communicate with the NVIDIA driver. Make sure that the latest NVIDIA driver is installed and running
+
+这是一个常见问题，经常出现在ubuntu系统中，主要原因还是系统内核升级了，导致新版本内核和原来显卡驱动不匹配
+
+只需执行两条命令就好：
+
+sudo apt-get install dkms
+
+查看之前安装驱动的版本号
+ls /usr/src | grep nvidia
+
+sudo dkms install -m nvidia -v 455.32.00（455.32.00表示的是驱动版本号）
+
+
+或者： 删除  /usr/src 中的nvidia驱动，然后用sudo apt 安装驱动,  /usr/src中就会出现新装的 nvidia-4XX.XX 文件，
+重启，若不行在用dkms重装。
+如果出错，看出错信息，通常需要对 kernel 文件内用 sudo make oldconfig( or sudo make oldconfig && sudo make prepare)
